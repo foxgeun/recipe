@@ -1,0 +1,209 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout1}">
+
+<div layout:fragment="content">
+
+	<th:block layout:fragment="css">
+
+		<link rel="stylesheet" href="/css/category.css">
+
+	</th:block>
+	
+	<div class="site-section mt-5 mb-5">
+	<div class="container">
+
+		<div class="thmb_list02 pt60">
+		<div class="search_sort">
+			<p>검색결과 <strong>[[${category.getContent().size()}]]</strong>5천억건 조회</p>
+			<ul class="sort_util">
+				<li class="active" id="order"><a href="/category?type=order">최신순</a></li>
+				<li class="active" id="best"><a href="/category?type=best">조회순</a></li>
+			</ul>
+				<input type="hidden" th:value="${recipeSearchDto.type}" id="type"> 
+		</div>
+		<div class="list_area">
+			
+
+		
+			<div class="search_form pb-3">
+		<th:block th:object="${recipeSearchDto}">
+					<select th:field="*{searchBy}" class="form_select form-control">
+						<option value="title">레시피명</option>
+						<option value="nickname">쉐프명</option>
+					</select> <input type="text" class="form-control form_search"
+						th:field="*{searchQuery}" placeholder="검색어를 입력해주세요">
+					<button id="searchBtn" type="submit" class="form_search_bt">검색</button>
+		</th:block>
+				</div>
+			<div class="category_form">
+				<a onclick="javascript:dynamicSearch1('')">전체</a>
+				<a onclick="javascript:dynamicSearch1('한식')">한식</a>
+				<a onclick="javascript:dynamicSearch1('일식')">일식</a>
+				<a onclick="javascript:dynamicSearch1('중식')">중식</a>
+				
+				
+			</div>
+	
+	
+		<div class="thmb_list02 pt60">
+		<div class="search_sort">
+			<p>검색결과 <strong>[[${category.getTotalElements()}]]</strong>건 조회</p>
+			<ul class="sort_util">
+				<li class="active" ><a onclick="javascript:dynamicSearch2('order')">최신순</a></li>
+				<li class="active" ><a onclick="javascript:dynamicSearch2('reviewCount')">리뷰많은순</a></li>
+				<li class="active" ><a onclick="javascript:dynamicSearch2('reviewAvg')">평점순</a></li>
+				<li class="active" ><a onclick="javascript:dynamicSearch2('countBest')">조회수높은순</a></li>
+			</ul>
+			  
+		</div>
+			<div class="list_box">
+		<div class="list_area">
+			
+			
+
+			<th:block th:each="recipe , status:${category}">
+			<div class="item">
+				<div class="thmb">
+					<a href="#"><div class="img">
+					<div class="scale">
+<<<<<<< HEAD
+
+					<img src="/img/장어덮밥.jpg" alt="레시피명">
+
+					<img src="/img/장어덮밥.jpg" th:alt="${recipe.title}">
+=======
+					<img th:src="${recipe.imageUrl}" th:alt="${recipe.title}">
+>>>>>>> 85e47e43bcd684c746cc55a3feb17efbd19c56fe
+					<span class="item-ranking">[[${status.index+1}]]</span>
+
+					<div class="back">
+						<p>조회수 : [[${recipe.count}]] </p> <p> 북마크수 : [[${recipe.bookmarkCount}]] </p>
+					</div> 
+					</div>
+					</div>
+						
+					</a>
+				</div>
+				<div class="info">
+					<div class="info_tag">
+					
+					<span>[[${recipe.subTitle}]]</span>
+					
+					</div>
+					<div class="info_title ellip"> <p>[[${recipe.title}]]</p></div>
+
+					<div class="info_title ellip challange"> <p>난이도 : [[${recipe.level}]]</p> <p>소요시간 : [[${recipe.durTime}]]분</p>  </div>
+
+					<div class="common_sp_caption_rv_name d-flex justify-content-center">
+                <a href="/"  style="display: inline-block; vertical-align: bottom;">
+					<th:block th:if="${recipe.imgUrl} == null">
+					<img src="/img/free-icon-member-5867267.png">
+					</th:block>	
+					<th:block th:unless="${recipe.imgUrl} == null">
+					<img th:src="${recipe.imgUrl}">
+					</th:block> 
+					[[${recipe.nickname}]]</a>
+            </div>
+					<div class="info_title ellip challange"> <p>난이도 : [[${recipe.level}]]</p> <p>소요시간 : [[${recipe.durTime}]]분</p>  </div>
+					<div class="info_title ellip challange"> <p>평점 : [[${recipe.retingAvg}]]([[${recipe.reviewCount}]])</p>  </div>
+
+				</div>
+			</div>
+			</th:block>
+		</div>
+			<div class="book_page">
+						<nav
+							th:with="start=${(category.number/maxPage)*maxPage + 1}
+			                 ,end=(${(category.totalPages == 0) ? 1 : (start + (maxPage - 1) < category.totalPages ? start + (maxPage - 1) : category.totalPages)})"
+							aria-label="Page navigation example">
+							<ul class="pagination d-flex justify-content-center">
+
+								<li class="page-item" 
+								th:classappend="${category.first}?'disabled'">
+									<a class="page-link"
+									th:onclick="'javascript:page(' + ${category.number - 1} +')'"><<</a>
+								</li>
+
+								<li class="page-item"
+									th:each="page: ${#numbers.sequence(start, end)}"
+									th:classappend="${category.number eq page-1}?'active':''"><a
+									class="page-link" th:inline="text"
+									th:onclick="'javascript:page(' + ${page - 1} +')'">[[${page}]]</a>
+								</li>
+
+								<li class="page-item" th:classappend="${category.last}?'disabled'">
+									<a class="page-link"
+									th:onclick="'javascript:page(' + ${category.number + 1} +')'">>></a>
+								</li>
+							</ul>
+						</nav>
+					</div>
+
+		</div>
+		</div>
+    	
+	</div>
+</div>
+	
+
+	  <input type="hidden" th:value="${recipeSearchDto.mainCategory}" id="mainCategory"> 
+	  <input type="hidden" th:value="${recipeSearchDto.type}" id="type"> 
+
+	
+</div>
+
+
+</div>
+</div>
+<th:block layout:fragment="script">
+	<script th:inline="javascript">
+
+	$(document).ready(function() {
+		
+			$("#searchBtn").on("click", function(e) {
+				e.preventDefault(); //submit되는걸 방지
+				page(0);
+			});
+			
+	 });
+	
+	
+	function dynamicSearch1(mainCategory){
+		
+		var type = $("#type").val();
+		var searchBy = $("#searchBy").val();
+		var searchQuery = $("#searchQuery").val();
+
+		//주소 이동
+		location.href = "/category/" + 0 + "?type=" + type 
+				+ "&mainCategory=" + mainCategory 
+				+ "&searchBy=" + searchBy
+				+ "&searchQuery=" + searchQuery + "";
+		
+	}
+	
+	function dynamicSearch2(type){
+		
+		
+		
+		var mainCategory = $("#mainCategory").val();
+		var searchBy = $("#searchBy").val();
+		var searchQuery = $("#searchQuery").val();
+
+		//주소 이동
+		location.href = "/category/" + 0 + "?type=" + type 
+				+ "&mainCategory=" + mainCategory 
+				+ "&searchBy=" + searchBy
+				+ "&searchQuery=" + searchQuery + "";
+		
+	}
+	
+	
+	</script>
+	</th:block>
+
+
+</html>

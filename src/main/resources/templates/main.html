@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout1}">
+<head>
+<meta name="_csrf" th:content="${_csrf.token}" />
+<meta name="_csrf_header" th:content="${_csrf.headerName}" />
+</head>	
+	<div layout:fragment="content">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+	
+	<th:block layout:fragment="css">
+	<link rel="stylesheet" href="css/main.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css">
+	</th:block>
+	<div class="main_box pb-5">
+		<section class="RecipeListstyle__Section-sc-1s9b4ly-1 gIeeQD">
+			<div class="styles__Title-sc-1ui0xdi-3 rQShB"><h1>RECIPES FOR YOU</h1><h2>맞춤추천 레시피를 둘러보세요.</h2></div>
+			
+			<div class="RecipeListstyle__CardList-sc-1s9b4ly-2 bNkAnv">
+				<div class="RecipeListstyle__Card-sc-1s9b4ly-5 bHqDkK">
+					<a th:href="'/recipe/' + ${headerBestList.get(0).id}">
+						<img th:src="${headerBestList.get(0).imageUrl}" th:alt="${headerBestList.get(0).title}" class="RecipeListstyle__CardImage-sc-1s9b4ly-14 iNbIQd">
+						<div class="RecipeListstyle__CardGredient-sc-1s9b4ly-3 hUapsG"></div>
+						<div class="RecipeListstyle__CardMeta-sc-1s9b4ly-6 iFMKeY">
+							<p class="RecipeListstyle__CardSubTitle-sc-1s9b4ly-7 hwxlrw">[[${headerBestList.get(0).subTitle}]]</p><p class="RecipeListstyle__CardTitle-sc-1s9b4ly-12 eMHKwY">[[${headerBestList.get(0).title}]]</p>
+							</div>
+					</a>
+				</div>
+			<div class="RecipeListstyle__CardSm-sc-1s9b4ly-9 bSdIJY">
+				<a th:href="'/recipe/' + ${headerBestList.get(1).id}">
+					<img th:src="${headerBestList.get(1).imageUrl}" th:alt="${headerBestList.get(1).title}" class="RecipeListstyle__CardImage-sc-1s9b4ly-14 RecipeListstyle__CardMdImage-sc-1s9b4ly-15 gZeRDV">
+					<div class="RecipeListstyle__CardSmGredient-sc-1s9b4ly-4 eDwCCr gredient"></div>
+					<div class="RecipeListstyle__CardSmMeta-sc-1s9b4ly-10 dHZATN">
+						<div class="RecipeListstyle__CardSmSubTitle-sc-1s9b4ly-11 cgGeDp">[[${headerBestList.get(1).title}]]</div>
+					</div>
+				</a>
+			</div>
+			<div class="RecipeListstyle__CardSm-sc-1s9b4ly-9 bSdIJY">
+				<a th:href="'/recipe/' + ${headerBestList.get(2).id}">
+					<img th:src="${headerBestList.get(2).imageUrl}" th:alt="${headerBestList.get(2).title}" class="RecipeListstyle__CardImage-sc-1s9b4ly-14 RecipeListstyle__CardMdImage-sc-1s9b4ly-15 gZeRDV">
+				<div class="RecipeListstyle__CardSmGredient-sc-1s9b4ly-4 eDwCCr gredient"></div>
+			<div class="RecipeListstyle__CardSmMeta-sc-1s9b4ly-10 dHZATN">
+				<div class="RecipeListstyle__CardSmSubTitle-sc-1s9b4ly-11 cgGeDp">[[${headerBestList.get(2).title}]]</div>
+			</div>
+			</a>
+			</div>
+			<div class="RecipeListstyle__Card-sc-1s9b4ly-5 bHqDkK">
+				<a th:href="'/recipe/' + ${headerBestList.get(3).id}">
+				<img th:src="${headerBestList.get(3).imageUrl}" th:alt="${headerBestList.get(3).title}" class="RecipeListstyle__CardImage-sc-1s9b4ly-14 RecipeListstyle__CardMdImage-sc-1s9b4ly-15 gZeRDV">
+				<div class="RecipeListstyle__CardGredient-sc-1s9b4ly-3 hUapsG"></div>
+				<div class="RecipeListstyle__CardMdMeta-sc-1s9b4ly-8 jZZqhz">
+					<p class="RecipeListstyle__CardSubTitle-sc-1s9b4ly-7 hwxlrw">[[${headerBestList.get(3).subTitle}]]</p><p class="RecipeListstyle__CardTitle-sc-1s9b4ly-12 eMHKwY">[[${headerBestList.get(3).title}]]</p>
+				</div>
+				</a>
+				</div>
+				</div>
+				</section>
+		
+		
+          
+
+	</div>
+	
+	<div class="container">
+			<div class="best_recipe_box">
+				
+				<h2 class="def_title">신규 레시피 
+	<a href="/category?type=order" class="fr">더보기 ></a>
+	</h2>
+	<div class="best_recipe_slider slider-wrap rec_list">
+	 
+	<th:block th:each=" n_r , status:${mainNewList}">
+		
+    <div class="slider-items">
+		
+      <div class="item item-related-book">
+		  <div class="collection-item book">
+		  <div class="item-cover">
+				<a th:href="'/recipe/' + ${n_r.id}">
+		  <img th:src="${n_r.imageUrl}"   class="item-cover-image">
+				</a>
+		  </div>
+		    <div class="item-meta">
+		<div class="item-title">
+			<h4>
+				<a href="/" >[[${n_r.title}]]</a>
+			</h4>
+		</div>
+		<div class="common_sp_caption_rv_name d-flex ">
+ 
+				<span class="count_s" th:text="'조회수 : ' + ${#numbers.formatInteger(n_r.count, 0, 'COMMA')}">
+				</span>
+            </div>
+		</div>
+		  </div>
+	  </div>
+	</div>
+	</th:block>
+    </div>
+			</div>
+			
+			
+			
+			
+		
+		
+		</div>
+		
+			<div class="container">
+			<div class="best_recipe_box">
+				
+				<h2 class="def_title">베스트 레시피 
+	<a href="/category?type=order" class="fr">더보기 ></a>
+	</h2>
+	<div class="best_recipe_slider slider-wrap rec_list">
+	 
+	<th:block th:each=" n_r , status:${mainBestList}">
+		
+    <div class="slider-items">
+		
+      <div class="item item-related-book">
+		  <div class="collection-item book">
+		  <div class="item-cover">
+				<a th:href="'/recipe/' + ${n_r.id}">
+		  <img th:src="${n_r.imageUrl}"   class="item-cover-image">
+				</a>
+		  </div>
+		    <div class="item-meta">
+		<div class="item-title">
+			<h4>
+				<a href="/" >[[${n_r.title}]]</a>
+			</h4>
+		</div>
+		<div class="common_sp_caption_rv_name d-flex ">
+
+				<span class="count_s" th:text="'조회수 : ' + ${#numbers.formatInteger(n_r.count, 0, 'COMMA')}">
+				</span>
+            </div>
+		</div>
+		  </div>
+	  </div>
+	</div>
+	</th:block>
+    </div>
+			</div>
+			
+			
+			
+			
+		
+		
+		</div>
+
+			
+
+	
+	</div>
+	
+	<th:block layout:fragment="script">
+ 
+<!-- Slick 불러오기 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css">
+	<script>
+	$(document).ready(function(){
+		  $('.banner_slider').slick({    
+		    infinite: true ,      // 무한반복
+		     slidesToShow: 1,     // 보여지는 슬라이드 개수
+		     slidesToScroll: 1,   // 넘어가는 슬라이드 개수
+		     dots: true           // 점 네비게이션 표시
+		    // arrows: false,        화살표 표시
+		    // fade:true             페이드 효과
+		    // autoplay: true,       자동스크롤
+		    // autoplaySpeed: 4000   자동스크롤 속도
+		    /* 반응형
+		    responsive: [
+		      {
+		        breakpoint: 1024,
+		        settings: {
+		          slidesToShow: 3,
+		          slidesToScroll: 3,
+		          infinite: true,
+		          dots: true
+		        }
+		      },
+		      {
+		        breakpoint: 600,
+		        settings: {
+		          slidesToShow: 2,
+		          slidesToScroll: 2
+		        }
+		      },
+		      {
+		        breakpoint: 480,
+		        settings: {
+		          slidesToShow: 1,
+		          slidesToScroll: 1
+		        }
+		      }
+		    ]
+		    */
+		  });
+		});
+       
+	$(document).ready(function(){
+		  $('.best_recipe_slider').slick({    
+		    infinite: false ,      // 무한반복
+		     slidesToShow: 5,     // 보여지는 슬라이드 개수
+		     slidesToScroll: 1,   // 넘어가는 슬라이드 개수
+		     dots: false           // 점 네비게이션 표시
+		    // arrows: false,        화살표 표시
+		    // fade:true             페이드 효과
+		    // autoplay: true,       자동스크롤
+		    // autoplaySpeed: 4000   자동스크롤 속도
+		    /* 반응형
+		    responsive: [
+		      {
+		        breakpoint: 1024,
+		        settings: {
+		          slidesToShow: 3,
+		          slidesToScroll: 3,
+		          infinite: true,
+		          dots: true
+		        }
+		      },
+		      {
+		        breakpoint: 600,
+		        settings: {
+		          slidesToShow: 2,
+		          slidesToScroll: 2
+		        }
+		      },
+		      {
+		        breakpoint: 480,
+		        settings: {
+		          slidesToShow: 1,
+		          slidesToScroll: 1
+		        }
+		      }
+		    ]
+		    */
+		  });
+		});
+	
+let isExpanded = false;  // 현재 상태를 저장하는 변수
+
+function more_recipe() {
+  const ulElement = document.querySelector('.ul_l');
+  const recListElements = ulElement.querySelectorAll('.rec_list');
+  const moreRecButton = document.querySelector('.more_rec');
+
+  // 현재 상태에 따라 처리
+  if (isExpanded) {
+    recListElements.forEach((el, index) => {
+      if (index >= 8) { // 9번째 엘리먼트부터 적용
+        el.style.display = 'none';
+      }
+    });
+    moreRecButton.textContent = '더보기';  // 텍스트를 '더보기'로 변경
+  } else {
+    recListElements.forEach((el, index) => {
+      if (index >= 8) { // 9번째 엘리먼트부터 적용
+        el.style.display = 'flex';
+      }
+    });
+    moreRecButton.textContent = '닫기';  // 텍스트를 '닫기'로 변경
+  }
+
+  // 상태 전환
+  isExpanded = !isExpanded;
+}
+ 
+ function followOk(element) {
+		var token = $("meta[name='_csrf']").attr("content");
+		var header = $("meta[name='_csrf_header']").attr("content");
+			var url = '/followReq' ;
+			var Id = element.getAttribute("data-member-id");
+			paramData = {id : Id}; 
+
+  			// 아이디가 없을 경우 함수를 빠져나감
+  			if (!Id) {
+   				 alert("에러 입니다");
+   				 return;
+  				}
+			
+			
+					
+					var param = JSON.stringify(paramData);
+					
+					$.ajax({
+						url : url, //request URL
+						type : "POST", //전송방식
+						contentType : "application/json",
+						data : param, //서버에 전송할 데이터
+						beforeSend : function(xhr) {
+							//데이터를 전송하기전에 헤더에 csrf 값을 설정
+							xhr.setRequestHeader(header, token);
+						},
+						dataType : "text",
+						cache : false,
+						success : function(result, status, jqXHR) {
+							 alert(jqXHR.responseText);
+							 window.location.reload(true); 
+							
+						},
+						error : function(jqXHR, status, error) {
+							if (jqXHR.status == '401') {
+								alert('관리자로그인 후 이용해주세요.');
+								//	location.href = '/';
+							} else {
+								//에러메세지 출력(ResponseEntity에서 받아온 값을 출력해준다)
+								alert(jqXHR.responseText);
+							}
+						}
+					})
+
+		}	
+ 
+ 
+          
+    </script>
+	
+	</th:block>
+	
+	
+</html>
