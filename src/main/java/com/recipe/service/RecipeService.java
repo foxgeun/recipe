@@ -4,6 +4,7 @@ package com.recipe.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 
 import org.springframework.data.domain.Pageable;
@@ -67,7 +68,8 @@ public class RecipeService {
 	
 	private final FileService fileService;
 	
-	private String recipeImgLocation = "C:/recipe/memberRecipe";
+	@Value("recipeImgLocation")
+	private String recipeImgLocation;
 	
 	
 	public List<Recipe> getAllRecipeList(){
